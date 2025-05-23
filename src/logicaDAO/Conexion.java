@@ -1,14 +1,20 @@
 package logicaDAO;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
 
-    public static Connection getConnection() throws SQLException {
-         Connection conexion = DriverManager.getConnection(System.getenv("DB_NAME"),
-          System.getenv("DB_USER"), System.getenv("DB_PASSWORD"));
-        return conexion;
+    private static Conexion instancia;
+
+    private Conexion() {
     }
 
+    public static Connection getConexion() throws SQLException,ClassNotFoundException {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection( ENV.getDB_URL(),ENV.getDB_USER(),ENV.getDB_PASSWORD());
+            return conexion;
+
+    }
 }
