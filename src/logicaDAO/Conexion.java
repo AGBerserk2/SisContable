@@ -6,15 +6,17 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-    private static Conexion instancia;
+    private static Connection conexion;
 
     private Conexion() {
     }
 
-    public static Connection getConexion() throws SQLException,ClassNotFoundException {
+    public static Connection getConexion() throws SQLException, ClassNotFoundException {
+        if (conexion == null) {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection( ENV.getDB_URL(),ENV.getDB_USER(),ENV.getDB_PASSWORD());
-            return conexion;
+            conexion = DriverManager.getConnection(ENV.getDB_URL(), ENV.getDB_USER(), ENV.getDB_PASSWORD());
+        }
+        return conexion;
 
     }
 }

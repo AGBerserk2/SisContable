@@ -1,14 +1,16 @@
-import java.sql.Connection;
-import java.sql.SQLException;
-import logicaDAO.Conexion;
-import logicaDAO.productoDAO;
+
+import logicaDAO.CategoriaDAO;
+import modelo.Categoria;
 
 public class App {
     public static void main(String[] args) {
-        try (Connection conexion = Conexion.getConexion()) {
-            System.out.println("conexion exitosa");
-        } catch (SQLException |ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+        var lista = new CategoriaDAO();
+        var cat = new Categoria(1,"MuebleS TUNEADOS");
+        System.out.println(lista.updateCategoria(cat));
+        for (var elem : lista.ListCategoria()) {
+
+            System.out.println(elem);
+
         }
     }
 }
